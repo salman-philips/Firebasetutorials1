@@ -41,27 +41,6 @@ public class MainActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
 
         pathForEntry = "";
-        valueEventListener = new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Map<String, String> data = (Map<String, String>) snapshot.getValue();
-
-                if (data != null) {
-                    Toast.makeText(MainActivity.this, "Name=" + data.get("Name") + " Age=" + data.get("Age"), Toast.LENGTH_SHORT).show();
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        databaseReference.child("Users/user1").addValueEventListener(valueEventListener);
-        //here I am trying to insert data at Users/user1/name and Users/user1/age but the value event is attached to user1
-        //and on update of age and name its called
     }
 
 
@@ -76,17 +55,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        databaseReference.child("Users/user1").removeEventListener(valueEventListener);
     }
 
     public void sendDataToFirebase(View view) {
         String name = firebaseEditText1.getText().toString().trim();
         String age = firebaseEditText2.getText().toString().trim();
         if (!name.isEmpty() && !age.isEmpty()) {
-            databaseReference.child("Users/user1/Name").setValue(name);
-            databaseReference.child("Users/user1/Age").setValue(age);
-            //for two setValue calls two times onChange will be called
-            //if u enter same data again and again no value event listener will be called
+            String key=databaseReference.push().getKey();
+            databaseReference.child(key).child("Name").setValue(name);
+            databaseReference.child(key).child("Age").setValue(age);
+
         }
     }
 
