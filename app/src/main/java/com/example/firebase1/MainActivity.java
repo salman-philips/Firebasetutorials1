@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
         //This method will be invoked every time there is a change in data or a new data it is inserted add the reference node in the database
         // practice one time it's initial initialization and then every time the data is changed
 //databaseReference.child("sel").addValueEventListener(new ValueEventListener() not possible if such ode dosent exists it will not create any new node sel
-        databaseReference.addValueEventListener(new ValueEventListener() { //bcox such method would be called once over evry initialization or button click
+        //this can be triggereed at any moment of function called and it will be destroyed once used
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() { //bcox such method would be called once over evry initialization or button click
             //without being called from database change as a part of initialization and returns null for above scanario
 //Simply attaching a  child to a reference which does not exist in the real database and if you try to have valuable listener on it it will be of no use
 // at that age it isn't create new path on the database
