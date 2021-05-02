@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -71,7 +74,19 @@ public class MainActivity extends AppCompatActivity {
         if (!data.isEmpty()) {
             //You can also add the value specifying the child as shown below if the child doesn't exist it would create the child note an active value
             //databaseReference.child("Specify the node").setValue......
-            databaseReference.child("selman").setValue(data);
+            databaseReference.child("selman").setValue(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(MainActivity.this,"Successfully sent",Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(MainActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                    //will not show up if internet is not there
+                    //so mostly if you want to test this change read and write changes in permission rules
+                }
+            });
             //However attaching a fake child while setting the data would create a path
         }
     }
