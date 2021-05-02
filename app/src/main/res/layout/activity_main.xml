@@ -7,12 +7,26 @@
     tools:context=".MainActivity">
 
     <EditText
+        android:id="@+id/FirebaseEditText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Age"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.404"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.339" />
+
+    <EditText
         android:id="@+id/FirebaseEditText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Enter Name"
         android:inputType="textPersonName"
-        android:hint="Enter here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.407"
@@ -39,17 +53,16 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/FirebaseEditText1"
-        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="@+id/FirebaseEditText1"
         app:layout_constraintTop_toBottomOf="@+id/FirebaseEditText1"
-        app:layout_constraintVertical_bias="0.138" />
+        app:layout_constraintVertical_bias="0.206" />
 
     <Button
         android:id="@+id/ReadFirebaseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Read data"
         android:onClick="readDataFromFirebase"
+        android:text="Read data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.727"
