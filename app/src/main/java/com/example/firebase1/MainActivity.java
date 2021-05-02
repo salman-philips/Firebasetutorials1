@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -82,18 +83,22 @@ public class MainActivity extends AppCompatActivity {
         //This method will be invoked every time there is a change in data or a new data it is inserted add the reference node in the database
         // practice one time it's initial initialization and then every time the data is changed
 //databaseReference.child("sel").addValueEventListener(new ValueEventListener() not possible if such ode dosent exists it will not create any new node sel
-        databaseReference.addValueEventListener(new ValueEventListener() { //bcox such method would be called once over evry initialization or button click
+        databaseReference.child("selman").addValueEventListener(new ValueEventListener() { //bcox such method would be called once over evry initialization or button click
             //without being called from database change as a part of initialization and returns null for above scanario
 //Simply attaching a  child to a reference which does not exist in the real database and if you try to have valuable listener on it it will be of no use
 // at that age it isn't create new path on the database
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                String data = snapshot.getValue(String.class);
-//                //However specifying random parts that may or may not exist will cause some exception while reading the data from the
-//                // database if such situations of sub directories and child nodes are not handled
-//                if (!data.isEmpty()) {
-//                    readFirebaseTextView1.setText(data);
-//                }
+                String data = snapshot.getValue(String.class);
+                //However specifying random parts that may or may not exist will cause some exception while reading the data from the
+                // database if such situations of sub directories and child nodes are not handled
+                if (!data.isEmpty()) {
+                    readFirebaseTextView1.setText(data);
+                    Log.d("Sel",data);
+                    //for every press of readData press like for every press it reads data and for 3 presses u have 3 listeners attached on every new update on database
+                    //3 times update on 3 different listeners will be called but when observed 2 times called
+                }
+
             }
 
             @Override
